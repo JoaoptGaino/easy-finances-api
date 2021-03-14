@@ -1,0 +1,11 @@
+version: "3"
+services:
+  finances-db:
+    container_name: finances-db
+    image: postgres:10.5-alpine
+    environment:
+      - "POSTGRES_DB=finances"
+      - "POSTGRES_USER=root"
+      - "POSTGRES_PASSWORD=root"
+    ports:
+      - "5433:5433"

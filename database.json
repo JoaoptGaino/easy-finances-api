@@ -1,0 +1,11 @@
+{
+  "dev": {
+    "driver": "pg",
+    "host": "localhost",
+    "port": 5432,
+    "database": "finances",
+    "user": "root",
+    "password": "root"
+  },
+  "sql-file": true
+}
