@@ -1,15 +1,25 @@
 import * as authentication from "@feathersjs/authentication";
-import { disallow } from "feathers-hooks-common";
 // Don't remove this comment. It's needed to format import lines nicely.
 
 const { authenticate } = authentication.hooks;
-
+const includeRelations = (context: any) => {
+  context.params.sequelize = {
+    include: [
+      {
+        model: context.app.services["types"].Model,
+        as: "TransactionType",
+      },
+    ],
+    raw: false,
+  };
+  return context;
+};
 export default {
   before: {
     all: [authenticate("jwt")],
-    find: [],
+    find: [includeRelations],
     get: [],
-    create: [disallow()],
+    create: [],
     update: [],
     patch: [],
     remove: [],
