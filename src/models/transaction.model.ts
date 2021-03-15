@@ -7,18 +7,22 @@ import { BaseModel } from "./common";
 
 export default function (app: Application): typeof Model {
   const sequelizeClient: Sequelize = app.get("sequelizeClient");
-  const users = sequelizeClient.define(
-    "users",
+  const transaction = sequelizeClient.define(
+    "transaction",
     {
       ...BaseModel,
-      email: {
+      description: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
       },
-      password: {
-        type: DataTypes.STRING,
+      value: {
+        type: DataTypes.DECIMAL,
         allowNull: false,
+      },
+      typeId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        field: "type_id",
       },
     },
     {
@@ -31,10 +35,12 @@ export default function (app: Application): typeof Model {
   );
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  (users as any).associate = function (models: any): void {
-    // Define associations here
-    // See http://docs.sequelizejs.com/en/latest/docs/associations/
+  (transaction as any).associate = function (models: any): void {
+    transaction.belongsTo(models.types, {
+      foreignKey: "typeId",
+      as: "TransactionType",
+    });
   };
 
-  return users;
+  return transaction;
 }

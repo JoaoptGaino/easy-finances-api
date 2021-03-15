@@ -1,0 +1,8 @@
+CREATE TABLE public.users(
+  id SERIAL PRIMARY KEY,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW(),
+  deleted_at TIMESTAMPTZ DEFAULT NULL,
+  email TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL
+);
