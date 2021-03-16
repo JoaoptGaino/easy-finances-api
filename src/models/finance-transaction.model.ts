@@ -3,8 +3,13 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
 import { Application } from "../declarations";
 import { HookReturn } from "sequelize/types/lib/hooks";
-import { BaseModel } from "./common";
+import { BaseModel, BaseModelType } from "./common";
 
+export interface FinanceTransactionModel extends BaseModelType {
+  description: string;
+  value: number;
+  typeId: number;
+}
 export default function (app: Application): typeof Model {
   const sequelizeClient: Sequelize = app.get("sequelizeClient");
   const transaction = sequelizeClient.define(

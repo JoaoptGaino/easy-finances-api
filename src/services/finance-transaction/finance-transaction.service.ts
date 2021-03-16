@@ -2,13 +2,13 @@
 import { ServiceAddons } from "@feathersjs/feathers";
 import { Application } from "../../declarations";
 import { FinanceTransaction } from "./finance-transaction.class";
-import createModel from "../../models/transaction.model";
+import createModel from "../../models/finance-transaction.model";
 import hooks from "./finance-transaction.hooks";
 
 // Add this service to the service type index
 declare module "../../declarations" {
   interface ServiceTypes {
-    financeTransaction: FinanceTransaction & ServiceAddons<any>;
+    "finance-transaction": FinanceTransaction & ServiceAddons<any>;
   }
 }
 
@@ -22,7 +22,7 @@ export default function (app: Application): void {
   app.use("/finance-transaction", new FinanceTransaction(options, app));
 
   // Get our initialized service so that we can register hooks
-  const service = app.service("financeTransaction");
+  const service = app.service("finance-transaction");
 
-  service?.hooks(hooks);
+  service.hooks(hooks);
 }
