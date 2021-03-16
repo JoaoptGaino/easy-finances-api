@@ -1,4 +1,4 @@
-CREATE TABLE public.transction (
+CREATE TABLE public.finance_transaction (
   id SERIAL PRIMARY KEY,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW(),

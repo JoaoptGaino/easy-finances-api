@@ -1,28 +1,26 @@
-// Initializes the `transaction` service on path `/transaction`
+// Initializes the `calculations` service on path `/calculations`
 import { ServiceAddons } from '@feathersjs/feathers';
 import { Application } from '../../declarations';
-import { Transaction } from './transaction.class';
-import createModel from '../../models/transaction.model';
-import hooks from './transaction.hooks';
+import { Calculations } from './calculations.class';
+import hooks from './calculations.hooks';
 
 // Add this service to the service type index
 declare module '../../declarations' {
   interface ServiceTypes {
-    'transaction': Transaction & ServiceAddons<any>;
+    'calculations': Calculations & ServiceAddons<any>;
   }
 }
 
 export default function (app: Application): void {
   const options = {
-    Model: createModel(app),
     paginate: app.get('paginate')
   };
 
   // Initialize our service with any options it requires
-  app.use('/transaction', new Transaction(options, app));
+  app.use('/calculations', new Calculations(options, app));
 
   // Get our initialized service so that we can register hooks
-  const service = app.service('transaction');
+  const service = app.service('calculations');
 
   service.hooks(hooks);
 }
